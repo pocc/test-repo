@@ -22,9 +22,7 @@ before_install:
 
 install:
   - sudo apt install python3 python3-pip
-  # Required for trusty builds
-  - /usr/bin/python3 -m pip install https://github.com/pallets/jinja/zipball/master
-  - /usr/bin/python3 -m pip install pipenv
+  - sudo /usr/bin/python3 -m pip install pipenv
   - /usr/bin/python3 -m pipenv install -r requirements.txt
   - pyinstaller --version
   - pyinstaller -y helloworld.py
