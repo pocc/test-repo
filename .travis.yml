@@ -18,7 +18,6 @@ branches:
 
 before_install:
   - sudo apt update
-  - exit
   - PIPENV_IGNORE_VIRTUALENVS=1
 
 install:
