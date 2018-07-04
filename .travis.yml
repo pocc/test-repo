@@ -13,17 +13,11 @@ python:
 
 # Only tagged commits
 branches:
-  only:
+  except:
   - master
 
-before_install:
-  - sudo apt update
-  - PIPENV_IGNORE_VIRTUALENVS=1
-
 install:
-  - sudo apt install python3 python3-pip
-  - sudo /usr/bin/python3 -m pip install pipenv
-  - /usr/bin/python3 -m pipenv install -r requirements.txt
+  - pip install -r requirements.txt
   - pyinstaller --version
   - pyinstaller -y helloworld.py
 
