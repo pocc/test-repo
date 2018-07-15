@@ -23,6 +23,8 @@ deploy:
   api_key:
     secure: opLzDBT7Mdzs1owZlzLSd3xFiK98JRCSX/bQnB9EhuqyUcNaU+vBRhuEZttG5RFXpoL/zDtrGp1hFqtC1XobiF8TR+CigCTvGvqZtGT9RsBJdL3k28R4CyJyTYo6Vwx+cA/n4Udkm6frPCfVRKyyyr7OrNEAIdXhPma8Jirn3etUx1VodaW9CpmpjEvmAoAMzy/16hjCfOTOhW7fLFaaXyudZcpr0hTYak855ydThfre8uosdqU/OkvxZst6ou/UpOJC0y1Dlb085rV2fPrOD5YxfbwuvFEPoJismEFVtboGbpgRNvOjzaLyf8WCf4L0Wxemn75LcXUwHpVc6fM15p2fA/kpcfit4VI4ABSmxcvvpnUrXt5PwhxEB9n6yF6AFkPYVbJFKGgzlObFBUirBJg9dKn+o55COqyfhkF7pnFvFINzanNQ41uO49YQigKbMYJH4tx0uVj5CJiyr7LJIdGDTYvp6O9BCWTMI0DdA6qauKqgxfeezDFeMnPIm9eD6/0Aep3veuq0fvJYai8VRiOlqBbZWqAk4yW0Fd566Tgndn1nCCpGZLtNImW/1kJhEEA7Nfwn1LZOjtydN685PoyBmoDLnVFgv8Gwdbx8H6TlPh13CAQjY2eKdL8ViQi3ZWKliwKvACTxySKaL0kK0lvQxe/7pBjkKvuQX29yxRY=
   file: "dist/helloworld/helloworld"
+  # Without this, cleaning will remove what you were planning on deploying
+  skip_cleanup: true
   on:
     repo: pocc/test-repo
     tags: true
