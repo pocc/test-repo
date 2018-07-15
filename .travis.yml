@@ -12,9 +12,9 @@ python:
 - '3.6'
 
 # Only tagged commits
-branches:
-  only:
-  - master
+#branches:
+#  only:
+#  - master
 
 before_install:
 
