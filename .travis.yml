@@ -17,14 +17,34 @@ branches:
   - master
 
 before_install:
-  - sudo apt update
-  - PIPENV_IGNORE_VIRTUALENVS=1
 
 install:
-  - sudo apt install python3 python3-pip
-  - sudo /usr/bin/python3 -m pip install pipenv
-  - /usr/bin/python3 -m pipenv install -r requirements.txt
+  - pip3 install -r requirements.txt
   - pyinstaller --version
   - pyinstaller -y helloworld.py
 
 script: ./dist/helloworld/helloworld
+
+
+deploy:
+  provider: releases
+  prerelease: true
+  file_glob: true
+  file:
+    # ${TRAVIS_TAG:1} strips the starting v from the tag
+    - dist/helloworld/helloworld
+  on:
+    repo: pocc/test-repo
+    # We only want the builds from xenial
+    dist: xenial
+    # Only build on a new release tag. $TRAVIS_TAG will be set to that tag.
+    tags: true
+  # Without this, cleaning will remove what you were planning on deploying
+  skip_cleanup: true
+
+  api_key:
+    secure: "DpBffyxFUXg/7/K/DPdR344cHNH67TPOL48yFChcon9fkzBH01/8fX0r5nAP8xyVqjH3cpj5gVZwOIuh/rNhhP8uPi7+k2Fu+1TbuLAge1SDLDHipiFJd5ZQrAP94nkWUKr855aLqOp7rsmc7lDQoD9neuRb+7NavDDNQ55x8jfek/OLajS9XN8H4WJJKn/Cu24LMdO7N2h7DJcjzg7xOFzfdHwwyPdlr36jPA0PmoSeIUZB+qYoEDh+3ZbN5rvdyQUJgn6KxOgMZlTqZ7yogO46TOdS3c416aGbdp3MX8j/2/LRoh9H/Lm23ze5PkyGBJCacdrSXLyBR8mveb0mTvA/tfckJzf//O4yCRyFcLVSzJO6ZloHZZxGX1X1tcvQaw0j6FRAkdrtV3vjse2g+pgIS6iibGGp2z6ltI7lVL+hFh8Wh5gmMPeU5cJJIL+ZBfLP1yVTUW+VP/n0tMnUyQjcbrzppDsJ0Oy6ZeRlveMHXu/XuJG78gyL6HuFu9GBoRviVaWu2PUM9PPYUX07wHNpoTHN9bJZsdu7uB5qp2Ab34Aa3zVwlgUMgoSr7qQjkIcOunDokec1Z1vFjEnYLQ11jCThpsDOJB+/Ym3V+TU40OjjF/VhYKk1ey8p4FI30UeyayM+xe7w/52PwpPGJ58Ta56XJdT66ioljMz0DHw="
+  username:
+    secure: AxaarXV7QlfagFtvkfmV9r39OmnaZ0RxOf1+tUSKU0Cu6cSloZK2WBnBAukkgVITnwfBlzGWy8V8s7+gH7ULzhUgH61Ug7yLInJwhAf2llnW3SaIUAL2hcBRF7n5ruxkzUmEnHRabyySthHDGHlvBuQa3DJY19rzsREwGP1CugsZyfGlMPiY4vA66Gm1t3oBrr3r3Ti8IXTbnUS5JX4Cwf0DDqetU7hkCz7TccUUkSUKTf7NVM/eF75vC/JHgBD/TZ7xSYOBk2q6lgYoBzZUxHNubg2rI0ruO1HqHxDxcMbh/6E1GF+0zxlQ0wncBTKNCjEpx1/tOQ2QEkstfOi9GZgGplsNUfd2NhTlHZNqggKiOaLMj7wj76c+88wpv82ZH50YmvOWLfijbcOq2JUXEF4Fl/zC93GqtfACwcO9A+VPbCTuhfF1w4qw0Y6boWJwJ3TvZSADWn+WBlPgKntyPoHtC2FA0EanpDGMOvWgfxjJAXix/Bzl8UPjtTDd552OOllAiz/Zsj8XbcMm+KnpLUsw7/YPnrmrlPCRTj0lgxyF5bF7PgqUumdnTNoEyjJr4Bn0ZnITFUzA+3n06EDS53PeTiGkcwn7hFMLkrBD0GKw8FXpa7DgPeLEJlYXJvavIpEYhPQ6l1d6jTvElS7hHdpj33UedogJH0cSTIT0ECA=
+  password:
+    secure: il6aPIZfjStfR+A7oAr3O9yXGBZXp8Fq8b6nuwLPzFgMfg9kXP/tzUmRTh74DVALyd68nAG/bW4RrbJTsSzZEBCDkFYZfOZmPcU8DE9eAfaEc7jNuJqibplgNcao+NqvTL7mFvfLyfjM5mn84c9XFoMemfB30+KVYZZfIIL3ECl0DmcvAEuDXH9DhZMIoGe7L75iFH6cMm3gRnFY7NgZXOGvaNDrsPOTFCLJJn5SiXQUux4JJ8RLY2NxMH/GbXmDm0zZ6jH3OMG/UYCqes5h5awWsL5VU4CBDtnEachRUeuCqMRrq0jbIdgEMu068jBOCCHyQB9KTwbuzv1iY3bg7/VEKGesGW0qFjzlJGcpVBRfGJKYy3fSL+grpfVMvkUVmSED7hRSs6Usc8cENzyfI3lzCHN/kZLQAKWuplsK92aR9rzz2MW0QBXOzRSV19xbZTfKroTYt5NJjgkHAsPSMmqJflXI5eKgcSE9wcZ0ocA/0isS4ecv08OOhHmcDCOQOJGBUY3EZauQ0UCVlwLvEGEukoDF4fh1jCI/gqPirtxWDHx+CAByTTTDpRKnsODlKZiAzLmYWeq+zmuixNC8gSrP1sFhoU9JHg5YVa1m699Zhc5D+otlvcWQx2iV30p/R4ZxFpj83nz59BbZPPUW7JSFDPH0T3LkpQBJKFa12GI=
