@@ -9,6 +9,9 @@ matrix:
 language: python
 python:
 - '3.6'
+branches: 
+  except:
+    - master
 before_install: 
 install:
 - pip3 install -r requirements.txt
@@ -22,3 +25,4 @@ deploy:
   file: dist/helloworld/helloworld
   on:
     repo: pocc/test-repo
+    tags: true
