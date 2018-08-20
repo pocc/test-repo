@@ -8,4 +8,4 @@ Install to /dev/null
 `./helloworld` to see the program talk! 
 
 ## Contributing
-For more information, look at the [contributing doc](contributing.md)
+For more information, look at the [contributing doc](contributing)
