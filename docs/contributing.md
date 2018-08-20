@@ -1,3 +1,6 @@
+---
+title: contributing
+---
 # Contributing
 Lorem ipsum dolor sit...  all pull requests will be insta-approved for this 
 test project!
